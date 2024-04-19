@@ -28,16 +28,12 @@ let totalBoughtBookQuanlity = 0;
 let boughtBooksQuanlity;
 if (window.localStorage.getItem("boughtBooksQuanlity") === null) {
   boughtBooksQuanlity = 0;
-  console.log("test dong 31");
   if (JSON.parse(localStorage.getItem("addedBooks")) === 0) {
-    console.log("test dong 32");
     boughtBooksQuanlity = 0;
     boutBooksQuanlity.textContent = boughtBooksQuanlity;
   } else {
-    console.log("test dong 37");
     boutBooksQuanlity.textContent = 0;
     boughtBooksQuanlity = JSON.parse(localStorage.getItem("addedBooks"));
-    console.log(boughtBooksQuanlity);
   }
 } else boughtBooksQuanlity = window.localStorage.getItem("boughtBooksQuanlity");
 let boughtBooks = window.localStorage.getItem("boughtBooks");
@@ -75,61 +71,60 @@ async function handleVerticalJSON() {
 }
 const results = handleVerticalJSON();
 results.then((data) => {
-  for (let j = 0; j <= datasets.length - 1; j++)
-    addBooks(data, datasets, kindBook, j);
-  for (let i = 0; i < datasets[datasets.length - 1].books.length; i++) {
-    const bestsellerBooksDivElements = document.createElement("div");
-    bestsellerBooksDivElements.classList.add("imformation-bestseller-books");
-    bestsellerBooksDivElements.setAttribute(
-      "id",
-      datasets[datasets.length - 1].books[i].id
-    );
-    bestSellerBooksBigElement.appendChild(bestsellerBooksDivElements);
+  try {
+    for (let j = 0; j <= datasets.length - 1; j++)
+      addBooks(data, datasets, kindBook, j);
+    for (let i = 0; i < datasets[datasets.length - 1].books.length; i++) {
+      const bestsellerBooksDivElements = document.createElement("div");
+      bestsellerBooksDivElements.classList.add("imformation-bestseller-books");
+      bestSellerBooksBigElement.appendChild(bestsellerBooksDivElements);
 
-    const imgElements = document.createElement("img");
-    imgElements.src = baseURL + datasets[datasets.length - 1].books[i].image;
-    imgElements.alt = datasets[datasets.length - 1].books[i].name;
-    imgElements.classList.add("bestseller-pictures");
-    imgElements.addEventListener("click", function () {
-      showItem(datasets[datasets.length - 1].books[i], datasets.length - 1);
-    });
-    bestsellerBooksDivElements.appendChild(imgElements);
+      const imgElements = document.createElement("img");
+      imgElements.src = baseURL + datasets[datasets.length - 1].books[i].image;
+      imgElements.alt = datasets[datasets.length - 1].books[i].name;
+      imgElements.classList.add("bestseller-pictures");
+      imgElements.addEventListener("click", function () {
+        showItem(datasets[datasets.length - 1].books[i], datasets.length - 1);
+      });
+      bestsellerBooksDivElements.appendChild(imgElements);
 
-    const contentElements = document.createElement("div");
-    contentElements.classList.add("bestSellerContent");
-    contentElements.addEventListener("click", function () {
-      showItem(datasets[datasets.length - 1].books[i], datasets.length - 1);
-    });
-    bestsellerBooksDivElements.appendChild(contentElements);
+      const contentElements = document.createElement("div");
+      contentElements.classList.add("bestSellerContent");
+      contentElements.addEventListener("click", function () {
+        showItem(datasets[datasets.length - 1].books[i], datasets.length - 1);
+      });
+      bestsellerBooksDivElements.appendChild(contentElements);
 
-    const contentTags = document.createElement("p");
-    contentTags.textContent = datasets[datasets.length - 1].books[i].name;
+      const contentTags = document.createElement("p");
+      contentTags.textContent = datasets[datasets.length - 1].books[i].name;
 
-    const priceElements = document.createElement("p");
-    priceElements.textContent =
-      datasets[datasets.length - 1].books[i].cost.toLocaleString("en-US") +
-      " VNĐ";
-    contentElements.appendChild(contentTags);
-    contentElements.appendChild(priceElements);
+      const priceElements = document.createElement("p");
+      priceElements.textContent =
+        datasets[datasets.length - 1].books[i].cost.toLocaleString("en-US") +
+        " VNĐ";
+      contentElements.appendChild(contentTags);
+      contentElements.appendChild(priceElements);
 
-    const imformationDivElements = document.createElement("div");
-    bestsellerBooksDivElements.appendChild(imformationDivElements);
+      const imformationDivElements = document.createElement("div");
+      bestsellerBooksDivElements.appendChild(imformationDivElements);
 
-    const detailDivElements = document.createElement("button");
-    imformationDivElements.appendChild(detailDivElements);
-    detailDivElements.textContent = "Chi tiết sản phẩm";
-    detailDivElements.addEventListener("click", function () {
-      showItem(datasets[datasets.length - 1].books[i], datasets.length - 1);
-    });
+      const detailDivElements = document.createElement("button");
+      imformationDivElements.appendChild(detailDivElements);
+      detailDivElements.textContent = "Chi tiết sản phẩm";
+      detailDivElements.addEventListener("click", function () {
+        showItem(datasets[datasets.length - 1].books[i], datasets.length - 1);
+      });
 
-    const addingDivElements = document.createElement("button");
-    imformationDivElements.appendChild(addingDivElements);
-    addingDivElements.textContent = "Thêm vào giỏ hàng";
-    addingDivElements.addEventListener("click", () => {
-      handleCart(datasets, datasets.length - 1, i);
-    });
+      const addingDivElements = document.createElement("button");
+      imformationDivElements.appendChild(addingDivElements);
+      addingDivElements.textContent = "Thêm vào giỏ hàng";
+      addingDivElements.addEventListener("click", () => {
+        handleCart(datasets, datasets.length - 1, i);
+      });
+    }
+  } catch (e) {
+    console.log(e);
   }
-  
 });
 
 function handleIndex(id) {
@@ -183,99 +178,104 @@ async function handleBookIndexJSON() {
 }
 const bookIndexResults = handleBookIndexJSON();
 bookIndexResults.then((data) => {
-  for (let j = 0; j <= datasets.length - 1; j++)
-    addBooks(data, datasets, kindBook, j);
-  const copiedData = copyData(datasets);
-  for (let i = 0; i <= datasets.length - 2; i++) {
-    const bookTopicElements = document.createElement("div");
-    bookTopicElements.classList.add("book-topics");
-    mainContentTag.appendChild(bookTopicElements);
-    const indexHeaders = document.createElement("h1");
-    indexHeaders.textContent = datasets[i].header;
-    bookTopicElements.appendChild(indexHeaders);
-    const bookTopicImages = document.createElement("div");
-    bookTopicImages.classList.add("book-topic-images");
-    bookTopicElements.appendChild(bookTopicImages);
-    const leftITag = document.createElement("i");
-    leftITag.classList.add("fa-solid");
-    leftITag.classList.add("fa-arrow-left");
-    bookTopicImages.appendChild(leftITag);
+  try {
+    for (let j = 0; j <= datasets.length - 1; j++)
+      addBooks(data, datasets, kindBook, j);
+    const copiedData = copyData(datasets);
 
-    for (let j = 0; j <= 3; j++) {
-      const subDivElements = document.createElement("div");
-      subDivElements.classList.add("subDivTags");
-      bookTopicImages.appendChild(subDivElements);
-      const imgTopicElements = document.createElement("img");
-      imgTopicElements.src = baseURL + datasets[i].books[j].image;
-      imgTopicElements.classList.add("book-images");
-      imgTopicElements.onmouseover = function () {
-        imformationDivElements.style.display = "flex";
-      };
-      imgTopicElements.addEventListener("mouseout", function () {
+    for (let i = 0; i <= datasets.length - 2; i++) {
+      const bookTopicElements = document.createElement("div");
+      bookTopicElements.classList.add("book-topics");
+      mainContentTag.appendChild(bookTopicElements);
+      const indexHeaders = document.createElement("h1");
+      indexHeaders.textContent = datasets[i].header;
+      bookTopicElements.appendChild(indexHeaders);
+      const bookTopicImages = document.createElement("div");
+      bookTopicImages.classList.add("book-topic-images");
+      bookTopicElements.appendChild(bookTopicImages);
+      const leftITag = document.createElement("i");
+      leftITag.classList.add("fa-solid");
+      leftITag.classList.add("fa-arrow-left");
+      bookTopicImages.appendChild(leftITag);
+
+      for (let j = 0; j <= 3; j++) {
+        const subDivElements = document.createElement("div");
+        subDivElements.classList.add("subDivTags");
+        bookTopicImages.appendChild(subDivElements);
+        const imgTopicElements = document.createElement("img");
+        imgTopicElements.src = baseURL + datasets[i].books[j].image;
+        imgTopicElements.classList.add("book-images");
+        imgTopicElements.onmouseover = function () {
+          imformationDivElements.style.display = "flex";
+        };
+        imgTopicElements.addEventListener("mouseout", function () {
+          imformationDivElements.style.display = "none";
+        });
+        imgTopicElements.addEventListener("click", function () {
+          item = findItemByClick(datasets, i, j);
+          showItem(item, i);
+        });
+        subDivElements.appendChild(imgTopicElements);
+        const bookNameElements = document.createElement("p");
+        bookNameElements.textContent = datasets[i].books[j].name;
+        bookNameElements.classList.add("book-names");
+        bookNameElements.addEventListener("click", function () {
+          item = findItemByClick(datasets, i, j);
+          showItem(item, i);
+        });
+
+        subDivElements.appendChild(bookNameElements);
+        const bookPriceElements = document.createElement("p");
+        bookPriceElements.classList.add("book-prices");
+        bookPriceElements.textContent =
+          datasets[i].books[j].cost.toLocaleString("en-US") + " VNĐ";
+        subDivElements.appendChild(bookPriceElements);
+
+        const imformationDivElements = document.createElement("div");
+        imformationDivElements.classList.add("bookFunction");
+        subDivElements.appendChild(imformationDivElements);
         imformationDivElements.style.display = "none";
-      });
-      imgTopicElements.addEventListener("click", function () {
-        item = findItemByClick(datasets, i, j);
-        showItem(item, i);
-      });
-      subDivElements.appendChild(imgTopicElements);
-      const bookNameElements = document.createElement("p");
-      bookNameElements.textContent = datasets[i].books[j].name;
-      bookNameElements.classList.add("book-names");
-      bookNameElements.addEventListener("click", function () {
-        item = findItemByClick(datasets, i, j);
-        showItem(item, i);
-      });
+        imformationDivElements.onmouseover = function () {
+          imformationDivElements.style.display = "flex";
+        };
+        imformationDivElements.addEventListener("mouseout", function () {
+          imformationDivElements.style.display = "none";
+        });
 
-      subDivElements.appendChild(bookNameElements);
-      const bookPriceElements = document.createElement("p");
-      bookPriceElements.classList.add("book-prices");
-      bookPriceElements.textContent =
-        datasets[i].books[j].cost.toLocaleString("en-US") + " VNĐ";
-      subDivElements.appendChild(bookPriceElements);
+        const addingBtnElements = document.createElement("button");
+        imformationDivElements.appendChild(addingBtnElements);
+        addingBtnElements.textContent = "Thêm vào giỏ hàng";
+        addingBtnElements.addEventListener("click", function () {
+          //dang lam o day
+          handleCart(datasets, i, j);
+        });
 
-      const imformationDivElements = document.createElement("div");
-      imformationDivElements.classList.add("bookFunction");
-      subDivElements.appendChild(imformationDivElements);
-      imformationDivElements.style.display = "none";
-      imformationDivElements.onmouseover = function () {
-        imformationDivElements.style.display = "flex";
-      };
-      imformationDivElements.addEventListener("mouseout", function () {
-        imformationDivElements.style.display = "none";
+        const detailsBtnElements = document.createElement("button");
+        imformationDivElements.appendChild(detailsBtnElements);
+        detailsBtnElements.textContent = "Chi tiết sản phẩm";
+        detailsBtnElements.addEventListener("click", function () {
+          item = findItemByClick(datasets, i, j);
+          showItem(item, i);
+        });
+      }
+
+      const rightIElements = document.createElement("i");
+      rightIElements.classList.add("fa-solid");
+      rightIElements.classList.add("fa-arrow-right");
+      rightIElements.classList.add("right");
+      bookTopicImages.appendChild(rightIElements);
+      const imgTopicTags = document.getElementsByClassName("book-images");
+      const bookNameTags = document.getElementsByClassName("book-names");
+      const bookPriceTags = document.getElementsByClassName("book-prices");
+      rightIElements.addEventListener("click", function () {
+        nextItem(copiedData, imgTopicTags, bookNameTags, bookPriceTags, i);
       });
-
-      const addingBtnElements = document.createElement("button");
-      imformationDivElements.appendChild(addingBtnElements);
-      addingBtnElements.textContent = "Thêm vào giỏ hàng";
-      addingBtnElements.addEventListener("click", function () {
-        //dang lam o day
-        handleCart(datasets, i, j);
-      });
-
-      const detailsBtnElements = document.createElement("button");
-      imformationDivElements.appendChild(detailsBtnElements);
-      detailsBtnElements.textContent = "Chi tiết sản phẩm";
-      detailsBtnElements.addEventListener("click", function () {
-        item = findItemByClick(datasets, i, j);
-        showItem(item, i);
+      leftITag.addEventListener("click", function () {
+        returnItem(copiedData, imgTopicTags, bookNameTags, bookPriceTags, i);
       });
     }
-
-    const rightIElements = document.createElement("i");
-    rightIElements.classList.add("fa-solid");
-    rightIElements.classList.add("fa-arrow-right");
-    rightIElements.classList.add("right");
-    bookTopicImages.appendChild(rightIElements);
-    const imgTopicTags = document.getElementsByClassName("book-images");
-    const bookNameTags = document.getElementsByClassName("book-names");
-    const bookPriceTags = document.getElementsByClassName("book-prices");
-    rightIElements.addEventListener("click", function () {
-      nextItem(copiedData, imgTopicTags, bookNameTags, bookPriceTags, i);
-    });
-    leftITag.addEventListener("click", function () {
-      returnItem(copiedData, imgTopicTags, bookNameTags, bookPriceTags, i);
-    });
+  } catch (e) {
+    console.log(e);
   }
 });
 
@@ -459,3 +459,22 @@ searchingBtnTag.addEventListener("click", function () {
   }
   window.location = "../Pages/SearChingPage.html";
 });
+const movingPictureTag = document.getElementById("moving-picture");
+const count = 50;
+for (let i = 0; i <= 50 - 1; i++) {
+  let leftSnow = Math.floor(Math.random() * movingPictureTag.clientWidth);
+  let topSnow = Math.floor(Math.random() * movingPictureTag.clientHeight);
+  let widthSnow = Math.floor(Math.random() * 50);
+  let timeSnow = Math.floor(Math.random() * 5) + 5;
+  let blurSnow = Math.floor(Math.random() * 20);
+
+  const leafElements = document.createElement("div");
+  leafElements.classList.add("leaf");
+  leafElements.style.left = leftSnow + "px";
+  leafElements.style.top = topSnow + "px";
+  leafElements.style.width = widthSnow + "px";
+  leafElements.style.height = widthSnow + "px";
+  leafElements.style.animationDuration = timeSnow + "s";
+  leafElements.style.filter = "blur(" + blurSnow + "px)";
+  movingPictureTag.appendChild(leafElements);
+}

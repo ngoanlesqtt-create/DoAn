@@ -2,7 +2,6 @@ body {
   background-color: rgb(252, 248, 243);
 }
 main {
-  /* flex: 1; */
   margin-bottom: 50px;
   padding-top: 175px;
 }
@@ -66,6 +65,7 @@ header {
 .Sach-BieuNgu-secondLine-Header {
   display: flex;
   align-items: center;
+  text-transform: uppercase;
 }
 .Sach-BieuNgu-secondLine-Header img {
   height: 50px;
@@ -77,19 +77,37 @@ header {
   font-style: italic;
   text-shadow: 1px 1px red;
   cursor: pointer;
+  animation: floating 2s linear infinite;
+  animation-direction: alternate;
 }
-.fa-brands:first-child {
+@keyframes floating {
+  0% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+.fa-facebook {
   color: blue;
 }
-.fa-brands:first-child + .fa-brands {
+.fa-twitter {
   color: white;
   background-color: rgb(129, 116, 243);
 }
-.fa-brands:first-child + .fa-brands + .fa-brands {
+.fa-instagram {
   color: pink;
 }
-.fa-brands:last-child {
+.fa-youtube {
   color: red;
+}
+.fa-brands {
+  transition-property: width;
+  transition-duration: 5ms;
+  transition-timing-function: ease-in-out;
+}
+.fa-brands:hover {
+  height: 20px;
 }
 .fa-solid {
   color: red;
@@ -132,6 +150,11 @@ header {
   height: fit-content;
   padding-left: 20px;
   padding-right: 20px;
+  border-radius: 20px;
+  border: 5px solid orange;
+  background-image: url(./Assets/ChongSach.jpg);
+  background-size: cover;
+  background-position: center;
 }
 ul {
   list-style-type: none;
@@ -165,7 +188,9 @@ li {
   top: 0;
   left: 280px;
   border-color: aquamarine;
-  z-index: 2;
+  border-radius: 20px;
+  z-index: 1;
+  color: black;
 }
 #verticalTaskBars h2 {
   text-align: center;
@@ -242,6 +267,7 @@ footer div ul {
 }
 #bestseller-books {
   width: 350px;
+  margin-bottom: 50px;
 }
 .bestseller-pictures {
   width: 50px;
@@ -253,7 +279,9 @@ footer div ul {
   align-items: center;
   cursor: pointer;
   height: 120px;
+  position: relative;
 }
+
 .imformation-bestseller-books div:last-child {
   display: flex;
   flex-direction: column;
@@ -279,6 +307,7 @@ footer div ul {
   margin-top: 30px;
   margin-left: 100px;
   margin-right: 40px;
+  margin-bottom: 50px;
 }
 .main-content img {
   width: 1000px;
@@ -336,6 +365,12 @@ footer div ul {
   height: 300px;
   width: 1000px;
   position: relative;
+  border-radius: 20px;
+  border: 5px solid orange;
+  background-image: url(./Assets/hinh-nen-giang-sinh-35.jpg);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
 .book-topic-images div {
   display: flex;
@@ -358,6 +393,7 @@ footer div ul {
   flex-direction: column;
   position: relative;
   width: 150px;
+  margin-bottom: 50px;
 }
 .book-names {
   text-align: center;
@@ -397,4 +433,184 @@ a {
 }
 #navigation ul li a:hover {
   color: grey;
+}
+#visual-advertisadvertisement {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+#visual-advertisadvertisement img {
+  cursor: pointer;
+  width: 300px;
+}
+#visual-advertisadvertisement::after,
+.subDivTags::after,
+.imformation-bestseller-books::after {
+  width: 0px;
+  background-color: white;
+  height: 0px;
+  position: absolute;
+  left: 0%;
+  top: 100%;
+  content: "";
+  transition-property: width, background-color, height;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+}
+#visual-advertisadvertisement:hover::after,
+.subDivTags:hover::after,
+.imformation-bestseller-books:hover:after {
+  background-color: yellowgreen;
+  width: 100%;
+  height: 10px;
+}
+#visual-advertisadvertisement div {
+  position: absolute;
+  top: 13%;
+  right: 7%;
+  background-color: red;
+  color: white;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.contact {
+  position: fixed;
+  right: 0;
+  transition-property: width, background-color;
+  transition-duration: 3s, 0.1s;
+  transition-timing-function: ease-in-out;
+}
+.contact:hover {
+  width: 280px;
+  background-color: greenyellow;
+}
+.Zalo {
+  top: 30%;
+}
+.Tik-Tok {
+  top: 40%;
+}
+.message {
+  top: 50%;
+}
+#shaking-phone {
+  animation-name: shake;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+#moving-picture {
+  position: relative;
+  margin-top: 10px;
+  height: 400px;
+  background-image: url(./Assets/MuaThu.jpg);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+#moving-picture #walkingMan {
+  position: absolute;
+  bottom: 0;
+  animation-name: moving;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  height: 100px;
+}
+.leaf {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 40px;
+  width: 40px;
+  background-image: url(./Assets/la.png);
+  background-size: cover;
+  animation: animationSnow 4s ease-in-out infinite;
+}
+@keyframes animationSnow {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(100px, 50vh);
+  }
+}
+@keyframes moving {
+  0% {
+    left: 0%;
+  }
+  10% {
+    left: 10%;
+  }
+  20% {
+  }
+  30% {
+    left: 30%;
+  }
+  40% {
+    left: 40%;
+  }
+  50% {
+    left: 50%;
+  }
+  60% {
+    left: 60%;
+  }
+  70% {
+    left: 70%;
+  }
+  80% {
+    left: 80%;
+  }
+  90% {
+    left: 90%;
+  }
+  100% {
+    left: 95%;
+  }
 }

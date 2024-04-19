@@ -95,7 +95,7 @@ if (boughtBooks !== null) {
     trTags.appendChild(tdCostElements);
     tdCostElements.classList.add("tdCostTags");
     tdCostElements.classList.add(i);
-    tdCostElements.textContent = boughtBooks[i].cost + " VNĐ";
+    tdCostElements.textContent = boughtBooks[i].cost;
 
     const tdQuantityElements = document.createElement("td");
     tdQuantityElements.classList.add("tdQuantityTags");
@@ -105,7 +105,9 @@ if (boughtBooks !== null) {
     const tdtotalCostElements = document.createElement("td");
     tdtotalCostElements.classList.add("tdTotalCostTags");
     tdtotalCostElements.classList.add(i);
-    tdtotalCostElements.textContent = boughtBooks[i].totalCost + " VNĐ";
+
+    tdtotalCostElements.textContent =
+      boughtBooks[i].totalCost.toLocaleString("en-US") + " VNĐ";
     trTags.appendChild(tdtotalCostElements);
 
     const tdEraserElements = document.createElement("td");

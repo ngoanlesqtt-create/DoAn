@@ -27,7 +27,6 @@ const kindBook = [
   "Lịch Sử",
   "Chính Trị",
 ];
-
 taskbarTag.innerHTML = `
 <ul>
 <li id="main-page">Trang chủ/</li>
