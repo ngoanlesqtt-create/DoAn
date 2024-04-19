@@ -23,6 +23,7 @@ const kindBook = [
   "Lịch Sử",
   "Chính Trị",
 ];
+let state = false;
 let changedItemQuanlity = 0;
 let totalBoughtBookQuanlity = 0;
 let boughtBooksQuanlity;
@@ -167,9 +168,8 @@ function addBooks(data, datasets, kindBook, j) {
     for (let i = 0; i <= book.genres.length - 1; i++)
       if (book.genres[i].includes(kindBook[j])) return book;
   });
-  for (let i = 0; i <= classicalBooks.length - 1; i++) {
+  for (let i = 0; i <= classicalBooks.length - 1; i++)
     datasets[j].books.push(classicalBooks[i]);
-  }
 }
 async function handleBookIndexJSON() {
   const response = await fetch("http://139.180.134.207:3000/book/all");
@@ -182,7 +182,6 @@ bookIndexResults.then((data) => {
     for (let j = 0; j <= datasets.length - 1; j++)
       addBooks(data, datasets, kindBook, j);
     const copiedData = copyData(datasets);
-
     for (let i = 0; i <= datasets.length - 2; i++) {
       const bookTopicElements = document.createElement("div");
       bookTopicElements.classList.add("book-topics");

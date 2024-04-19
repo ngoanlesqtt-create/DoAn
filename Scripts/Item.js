@@ -144,7 +144,6 @@ async function handleJSONBooks() {
   const results = await response.json();
   return results;
 }
-
 const JSONBooks = handleJSONBooks();
 JSONBooks.then((book) => {
   for (let i = 0; i <= book.length - 1; i++) datasets.push(book[i]);
