@@ -5,6 +5,9 @@ main {
   min-height: 500px;
   align-items: center;
 }
+main > ul li {
+  width: 75px;
+}
 main h1 {
   text-align: center;
   text-shadow: 2px 2px 4px #000000;
@@ -14,9 +17,6 @@ main ul {
   width: 130px;
   padding-left: 20px;
   margin-top: 20px;
-}
-main ul li:first-child {
-  width: 75px;
 }
 
 main ul li:first-child a {
@@ -115,4 +115,18 @@ h2 {
   margin-top: 10px;
   text-decoration: none;
   color: orange;
+}
+.fa-solid {
+  color: orangered;
+}
+#navigation {
+  width: 100%;
+}
+#navigation ul {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+#navigation ul li a {
+  color: white;
 }

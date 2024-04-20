@@ -1,3 +1,4 @@
+const bodyTag = document.getElementById("body");
 const bestSellerBooksBigElement = document.getElementById("bestseller-books");
 const rightArrows = document.getElementsByClassName("fa-solid fa-arrow-right");
 const leftArrows = document.getElementsByClassName("fa-solid fa-arrow-left");
@@ -7,8 +8,8 @@ const mainContentTag = document.getElementById("main-content");
 const hightlightBooks = document.getElementById("hightlight-books");
 const boutBooksQuanlity = document.getElementById("bought-book-quanlity");
 const cartMovementTag = document.getElementById("cart-movement");
+const popUpTag = document.getElementById("pop-up");
 const baseURL = "http://139.180.134.207/DoAnMobile/Client/assets/images/";
-
 let countedImages = 1;
 let relatedBooks = [];
 let item;
@@ -43,7 +44,6 @@ if (boughtBooks !== null) {
   boughtBooksQuanlity = JSON.parse(
     window.localStorage.getItem("boughtBooksQuanlity")
   );
-  console.log("test dong 49 main");
   if (boughtBooksQuanlity === null)
     boughtBooksQuanlity = JSON.parse(window.localStorage.getItem("addedBooks"));
   else
@@ -73,6 +73,9 @@ async function handleVerticalJSON() {
 const results = handleVerticalJSON();
 results.then((data) => {
   try {
+    if (data) popUpTag.style.display = "none";
+    else popUpTag.style.display = "block";
+
     for (let j = 0; j <= datasets.length - 1; j++)
       addBooks(data, datasets, kindBook, j);
     for (let i = 0; i < datasets[datasets.length - 1].books.length; i++) {
