@@ -334,6 +334,9 @@ footer div ul {
   text-align: center;
   color: white;
 }
+.imformation-bestseller-books div:last-child button:hover {
+  box-shadow: 5px 10px 8px 10px #888888;
+}
 .imformation-bestseller-books div:last-child button:last-child {
   margin-top: 10px;
 }
@@ -434,7 +437,8 @@ footer div ul {
   width: 150px;
   margin-bottom: 50px;
 }
-.subDivTags:hover {
+.subDivTags:hover,
+.imformation-bestseller-books:hover {
   box-shadow: 10px 10px 10px 10px;
 }
 .book-names {
@@ -487,7 +491,7 @@ a {
   width: 300px;
 }
 #visual-advertisadvertisement img:hover {
-  box-shadow: 10px 10px 10px 10px;
+  box-shadow: 5px 10px 8px 10px #888888;
 }
 #visual-advertisadvertisement::after,
 .subDivTags::after,
@@ -668,4 +672,25 @@ ul li:hover,
 h1:hover,
 h2:hover {
   text-shadow: 0px 5px 5px #c2b3b3;
+}
+.cross-menu {
+  position: relative;
+}
+.sub {
+  display: none;
+}
+.cross-menu:hover .sub {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: rgb(247, 216, 216);
+  z-index: 1;
+  top: 100%;
+  left: 36%;
+  color: black;
+  border-radius: 20px;
+}
+
+.cross-menu:hover .sub p:hover {
+  color: orange;
 }

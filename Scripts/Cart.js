@@ -3,6 +3,10 @@ const boughtBooksQuanlity = document.getElementById("bought-book-quanlity");
 const tableTag = document.getElementById("table");
 const infomingElement = document.createElement("h2");
 const paymentTag = document.getElementById("payment");
+const payingDivTag = document.getElementById("paying-div");
+const finalPaymentImformationTag = document.getElementById(
+  "final-payment-imformation"
+);
 infomingElement.textContent = "Giỏ hàng của bạn chưa có sản phẩm nào";
 let boughtBooks = JSON.parse(window.localStorage.getItem("boughtBooks"));
 let addedBooks = window.localStorage.getItem("boughtBooksQuanlity");
@@ -310,7 +314,7 @@ const paymentContent = `
 <h4 id="totalCost">Tổng tiền: ${totalCost.toLocaleString("en-US")} VNĐ</h4>
 <h4 id="totalQuanlity">Số lượng: ${totalQuanlity} quyển</h4>
 <p>Phí vận chuyển của bạn sẽ được tình ở trang thanh toán</p>
-<button type="button">THANH TOÁN</button>
+<button type="button" id="paying-btn">THANH TOÁN</button>
 <br>
 <br>
 <a href="../index.html">Tiếp tục mua hàng</a>
@@ -332,3 +336,49 @@ function caculateTotalQuanlityAndCost(boughtBooks) {
     totalQuanlityTag.textContent = `Số lượng: ${totalQuanlity} quyển`;
   }
 }
+const payingBtnTag = document.getElementById("paying-btn");
+payingBtnTag.addEventListener("click", function () {
+  payingDivTag.style.display = "flex";
+  payingDivTag.style.flexDirection = "column";
+  const finalBoughtBooks = JSON.parse(localStorage.getItem("boughtBooks"));
+  for (let i = 0; i <= finalBoughtBooks.length - 1; i++) {
+    const finalDivTags = document.createElement("tr");
+    finalPaymentImformationTag.appendChild(finalDivTags);
+
+    const imgOfTdElements = document.createElement("th");
+    const imgOfFinalBoughtBookElements = document.createElement("img");
+    imgOfFinalBoughtBookElements.src = baseURL + finalBoughtBooks[i].image;
+    finalDivTags.appendChild(imgOfTdElements);
+    imgOfTdElements.appendChild(imgOfFinalBoughtBookElements);
+
+    const finalBookNameElements = document.createElement("th");
+    finalBookNameElements.textContent = finalBoughtBooks[i].name;
+    finalDivTags.appendChild(finalBookNameElements);
+
+    const finalQuanlityElements = document.createElement("th");
+    finalQuanlityElements.textContent = finalBoughtBooks[i].quanlity + " quyển";
+    finalDivTags.appendChild(finalQuanlityElements);
+
+    const finalBookPriceElements = document.createElement("th");
+    finalBookPriceElements.textContent = finalBoughtBooks[i].totalCost + " VNĐ";
+    finalDivTags.appendChild(finalBookPriceElements);
+  }
+  const fianlDivElements = document.createElement("tr");
+  finalPaymentImformationTag.appendChild(fianlDivElements);
+
+  const emtyElements1 = document.createElement("th");
+  const emtyElements2 = document.createElement("th");
+  emtyElements1.textContent = "Tổng cộng:";
+  emtyElements2.textContent = "";
+  fianlDivElements.appendChild(emtyElements1);
+  fianlDivElements.appendChild(emtyElements2);
+
+  const totalFinalQuanlityElements = document.createElement("th");
+  totalFinalQuanlityElements.textContent = totalQuanlity + " quyển";
+  fianlDivElements.appendChild(totalFinalQuanlityElements);
+
+  const totalFinalPriceElements = document.createElement("th");
+  totalFinalPriceElements.textContent =
+    totalCost.toLocaleString("en-US") + " VNĐ";
+  fianlDivElements.appendChild(totalFinalPriceElements);
+});

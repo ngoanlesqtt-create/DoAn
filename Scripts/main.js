@@ -74,7 +74,6 @@ const results = handleVerticalJSON();
 results.then((data) => {
   try {
     if (data) popUpTag.style.display = "none";
-    else popUpTag.style.display = "block";
 
     for (let j = 0; j <= datasets.length - 1; j++)
       addBooks(data, datasets, kindBook, j);

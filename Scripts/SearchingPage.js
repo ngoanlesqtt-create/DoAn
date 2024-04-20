@@ -3,6 +3,7 @@ const searchingInputTag = document.getElementById("search");
 const searchingBtnTag = document.getElementById("search-btn");
 const boughtBooksQuanlityTag = document.getElementById("bought-book-quanlity");
 const cartNavigationTag = document.getElementById("cart-navigation");
+const popUpTag = document.getElementById("pop-up");
 
 let inputValue;
 let state = false;
@@ -32,6 +33,7 @@ async function handleVerticalJSON() {
 }
 const results = handleVerticalJSON();
 results.then((data) => {
+  if (data) popUpTag.style.display = "none";
   for (let i = 0; i <= data.length - 1; i++)
     if (data[i].name.includes(searchingWords)) searchedDatas.push(data[i]);
   if (searchedDatas.length >= 1) {
