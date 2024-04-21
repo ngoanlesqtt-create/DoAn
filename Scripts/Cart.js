@@ -29,20 +29,15 @@ const thArr = ["", "Tên sản phẩm", "Giá", "Số lượng", "Thành tiền"
 const baseURL = "http://139.180.134.207/DoAnMobile/Client/assets/images/";
 if (totalQuanlity === 0)
   boughtBooksQuanlity.textContent = localStorage.getItem("boughtBooksQuanlity");
-console.log(addedBooks);
 mainTag.appendChild(infomingElement);
 if (
   addedBooks === null ||
   addedBooks === 0 ||
   addedBooks === "0" ||
   addedBooks === "null"
-) {
-  console.log("test dong 26 cart");
-  boughtBooksQuanlity.textContent = 0;
-  tableTag.style.display = "none";
-  infomingElement.style.display = "block";
-  paymentTag.style.display = "none";
-} else {
+)
+  resetPage();
+else {
   infomingElement.style.display = "none";
   boughtBooksQuanlity.textContent = addedBooks;
   tableTag.style.display = "block";
@@ -352,46 +347,76 @@ payingBtnTag.addEventListener("click", function () {
   const finalBoughtBooks = JSON.parse(localStorage.getItem("boughtBooks"));
   for (let i = 0; i <= finalBoughtBooks.length - 1; i++) {
     const finalDivTags = document.createElement("tr");
+    finalDivTags.classList.add("earsing-tag");
     finalPaymentImformationTag.appendChild(finalDivTags);
 
     const imgOfTdElements = document.createElement("th");
+    imgOfTdElements.classList.add("earsing-tag");
+
     const imgOfFinalBoughtBookElements = document.createElement("img");
+    imgOfFinalBoughtBookElements.classList.add("earsing-tag");
     imgOfFinalBoughtBookElements.src = baseURL + finalBoughtBooks[i].image;
     finalDivTags.appendChild(imgOfTdElements);
     imgOfTdElements.appendChild(imgOfFinalBoughtBookElements);
 
     const finalBookNameElements = document.createElement("th");
+    finalBookNameElements.classList.add("earsing-tag");
     finalBookNameElements.textContent = finalBoughtBooks[i].name;
     finalDivTags.appendChild(finalBookNameElements);
 
     const finalQuanlityElements = document.createElement("th");
+    finalQuanlityElements.classList.add("earsing-tag");
     finalQuanlityElements.textContent = finalBoughtBooks[i].quanlity + " quyển";
     finalDivTags.appendChild(finalQuanlityElements);
 
     const finalBookPriceElements = document.createElement("th");
+    finalBookPriceElements.classList.add("earsing-tag");
     finalBookPriceElements.textContent = finalBoughtBooks[i].totalCost + " VNĐ";
     finalDivTags.appendChild(finalBookPriceElements);
   }
   const fianlDivElements = document.createElement("tr");
+  fianlDivElements.classList.add("earsing-imformation-tag");
   finalPaymentImformationTag.appendChild(fianlDivElements);
 
   const emtyElements1 = document.createElement("th");
+  emtyElements1.classList.add("earsing-imformation-tag");
   const emtyElements2 = document.createElement("th");
+  emtyElements2.classList.add("earsing-imformation-tag");
   emtyElements1.textContent = "Tổng cộng:";
   emtyElements2.textContent = "";
   fianlDivElements.appendChild(emtyElements1);
   fianlDivElements.appendChild(emtyElements2);
 
   const totalFinalQuanlityElements = document.createElement("th");
+  totalFinalQuanlityElements.classList.add("earsing-imformation-tag");
   totalFinalQuanlityElements.textContent = totalQuanlity + " quyển";
   fianlDivElements.appendChild(totalFinalQuanlityElements);
 
   const totalFinalPriceElements = document.createElement("th");
+  totalFinalPriceElements.classList.add("earsing-imformation-tag");
   totalFinalPriceElements.textContent =
     totalCost.toLocaleString("en-US") + " VNĐ";
   fianlDivElements.appendChild(totalFinalPriceElements);
+  tableTag.style.display = "none";
+  paymentTag.style.display = "none";
 });
 earsingImformationBtn.addEventListener("click", function () {
+  const earasingTableTags = document.getElementsByClassName("earsing-tag");
+  const earasingTotalImformationTags =
+    document.getElementsByClassName("earsing-tag");
+  for (let i = 5; 0 <= i; i--) earasingTotalImformationTags[i].remove();
+  for (let i = 0; i <= earasingTableTags.length - 1; i++) {
+    earasingTableTags[i].remove();
+    eraserElements(i);
+  }
+  removeLocalStorage();
+  resetPage();
   payingDivTag.style.display = "none";
   bodyTag.style.backgroundColor = "rgb(252, 248, 243)";
 });
+function resetPage() {
+  boughtBooksQuanlity.textContent = 0;
+  tableTag.style.display = "none";
+  infomingElement.style.display = "block";
+  paymentTag.style.display = "none";
+}

@@ -110,6 +110,7 @@ main {
   align-items: center;
 }
 #navigation {
+  margin-top: 50px;
   width: 100%;
 }
 #book-name {
