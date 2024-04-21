@@ -12,6 +12,8 @@ const hightlightBooks = document.getElementById("hightlight-books");
 const boutBooksQuanlity = document.getElementById("bought-book-quanlity");
 const cartMovementTag = document.getElementById("cart-movement");
 const popUpTag = document.getElementById("pop-up");
+const bigSearchingDivTag = document.getElementById("searching-div");
+const searchingDivTag = document.getElementById("searched-books");
 const baseURL = "http://139.180.134.207/DoAnMobile/Client/assets/images/";
 let countedImages = 1;
 let relatedBooks = [];
@@ -454,11 +456,101 @@ cartMovementTag.addEventListener("click", function () {
   window.localStorage.setItem("addedBooks", boughtBooksQuanlity);
   location.href = "./Pages/Cart.html";
 });
+let searchedBooks = [];
+let expectedBooks = [];
 const searchingTag = document.getElementById("search");
-searchingTag.onchange = function () {
+searchingTag.oninput = function () {
   let searchingWords = searchingTag.value;
+  results.then((data) => {
+    if (searchedBooks.length === 0)
+      data.map((dat) => {
+        if (
+          dat.name[searchingWords.length - 1] ===
+          searchingWords[searchingWords.length - 1]
+        )
+          searchedBooks.push(dat);
+      });
+    if (expectedBooks.length === 0 && searchingWords !== " ")
+      expectedBooks = searchedBooks.filter((data) => {
+        if (
+          data.name[searchingWords.length - 1] ===
+          searchingWords[searchingWords.length - 1]
+        )
+          return data;
+      });
+    else if (expectedBooks.length >= 1 && searchingWords !== " ")
+      expectedBooks = expectedBooks.filter((data) => {
+        if (
+          data.name[searchingWords.length - 1] ===
+          searchingWords[searchingWords.length - 1]
+        )
+          return data;
+      });
+
+    console.log(expectedBooks);
+
+    if (expectedBooks.length >= 2) {
+      for (let i = 0; i < expectedBooks.length - 1; i++)
+        for (let j = i + 1; j < expectedBooks.length; j++)
+          if (expectedBooks[i].name === expectedBooks[j].name)
+            expectedBooks.splice(i, 1);
+    }
+    console.log("expectedBooks", expectedBooks);
+    let unexpectedBooks = searchedBooks.filter((data) => {
+      if (
+        data.name[searchingWords.length - 1] !==
+        searchingWords[searchingWords.length - 1]
+      )
+        return data;
+    });
+    console.log("unexpected books: ", unexpectedBooks);
+    expectedBooks.map((data) => {
+      renderSearchedItems(data);
+    });
+
+    const divs = document.getElementsByClassName("div");
+    const imges = document.getElementsByClassName("img");
+    const ps = document.getElementsByClassName("p");
+
+    if (unexpectedBooks.length > 0) {
+      if (divs.length >= searchedBooks.length)
+        for (let i = searchedBooks.length - 1; 0 <= i; i--) {
+          removeSearchedItems(i, ps, imges, divs);
+        }
+      else
+        for (let i = divs.length - 2; 0 <= i; i--) {
+          removeSearchedItems(i, ps, imges, divs);
+        }
+    }
+    if (searchingWords.length === 0)
+      for (let i = imges.length - 1; 0 <= i; i--) {
+        removeSearchedItems(i, ps, imges, divs);
+      }
+  });
   localStorage.setItem("searchingWords", searchingWords);
 };
+function renderSearchedItems(data = []) {
+  searchingDivTag.style.display = "flex";
+
+  const divTags = document.createElement("div");
+  searchingDivTag.appendChild(divTags);
+  divTags.classList.add("div");
+
+  const imageElements = document.createElement("img");
+  imageElements.src = baseURL + data.image;
+  divTags.appendChild(imageElements);
+  imageElements.classList.add("img");
+
+  const nameBookElements = document.createElement("p");
+  nameBookElements.textContent = data.name;
+  divTags.appendChild(nameBookElements);
+  nameBookElements.classList.add("p");
+}
+function removeSearchedItems(i, ps, imges, divs) {
+  ps[i].remove();
+  imges[i].remove();
+  divs[i].remove();
+}
 const searchingBtnTag = document.getElementById("search-btn");
 searchingBtnTag.addEventListener("click", function () {
   let searchingWords = localStorage.getItem("searchingWords");
@@ -497,3 +589,8 @@ if (token) {
   usernameTag.textContent = localStorage.getItem("username");
   registerTag.style.display = "none";
 }
+mainTag.addEventListener("click", function () {
+  localStorage.removeItem("searchingWords");
+  searchedBooks = [];
+  expectedBooks = [];
+});

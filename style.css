@@ -696,3 +696,26 @@ h2:hover {
 .cross-menu:hover .sub p:hover {
   color: orange;
 }
+#searching-div {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+#searched-books {
+  display: none;
+  background-color: pink;
+  width: 400px;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  border-radius: 20px;
+  overflow-y: scroll;
+}
+.div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.div p {
+  margin-left: 50px;
+}
