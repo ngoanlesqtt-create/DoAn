@@ -1,4 +1,7 @@
 const bodyTag = document.getElementById("body");
+const mainTag = document.getElementById("main");
+const headerTag = document.getElementById("header");
+const footerTag = document.getElementById("footer");
 const bestSellerBooksBigElement = document.getElementById("bestseller-books");
 const rightArrows = document.getElementsByClassName("fa-solid fa-arrow-right");
 const leftArrows = document.getElementsByClassName("fa-solid fa-arrow-left");
@@ -73,8 +76,6 @@ async function handleVerticalJSON() {
 const results = handleVerticalJSON();
 results.then((data) => {
   try {
-    if (data) popUpTag.style.display = "none";
-
     for (let j = 0; j <= datasets.length - 1; j++)
       addBooks(data, datasets, kindBook, j);
     for (let i = 0; i < datasets[datasets.length - 1].books.length; i++) {
@@ -181,6 +182,13 @@ async function handleBookIndexJSON() {
 const bookIndexResults = handleBookIndexJSON();
 bookIndexResults.then((data) => {
   try {
+    if (data) {
+      bodyTag.style.backgroundColor = "rgb(252, 248, 243)";
+      footerTag.style.display = "block";
+      mainTag.style.display = "block";
+      headerTag.style.display = "block";
+      popUpTag.style.display = "none";
+    }
     for (let j = 0; j <= datasets.length - 1; j++)
       addBooks(data, datasets, kindBook, j);
     const copiedData = copyData(datasets);

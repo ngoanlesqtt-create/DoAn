@@ -1,3 +1,15 @@
+body {
+  background-color: rgb(252, 248, 243);
+}
+footer {
+  display: block;
+}
+header {
+  display: block;
+}
+footer {
+  display: block;
+}
 #render-item {
   display: flex;
   justify-content: space-around;
@@ -110,7 +122,6 @@ main {
   align-items: center;
 }
 #navigation {
-  margin-top: 50px;
   width: 100%;
 }
 #book-name {

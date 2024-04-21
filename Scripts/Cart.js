@@ -5,6 +5,7 @@ const tableTag = document.getElementById("table");
 const infomingElement = document.createElement("h2");
 const paymentTag = document.getElementById("payment");
 const payingDivTag = document.getElementById("paying-div");
+const mainPageMovement = document.getElementById("main-page-movement");
 const finalPaymentImformationTag = document.getElementById(
   "final-payment-imformation"
 );
@@ -30,6 +31,10 @@ const baseURL = "http://139.180.134.207/DoAnMobile/Client/assets/images/";
 if (totalQuanlity === 0)
   boughtBooksQuanlity.textContent = localStorage.getItem("boughtBooksQuanlity");
 mainTag.appendChild(infomingElement);
+mainPageMovement.addEventListener("click", function () {
+  if (JSON.parse(localStorage.getItem("addedBooks")) === null);
+  localStorage.removeItem("addedBooks");
+});
 if (
   addedBooks === null ||
   addedBooks === 0 ||
