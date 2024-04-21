@@ -1,3 +1,4 @@
+const bodyTag = document.getElementById("body");
 const mainTag = document.getElementById("main");
 const boughtBooksQuanlity = document.getElementById("bought-book-quanlity");
 const tableTag = document.getElementById("table");
@@ -6,6 +7,9 @@ const paymentTag = document.getElementById("payment");
 const payingDivTag = document.getElementById("paying-div");
 const finalPaymentImformationTag = document.getElementById(
   "final-payment-imformation"
+);
+const earsingImformationBtn = document.getElementById(
+  "earsing-imformation-btn"
 );
 infomingElement.textContent = "Giỏ hàng của bạn chưa có sản phẩm nào";
 let boughtBooks = JSON.parse(window.localStorage.getItem("boughtBooks"));
@@ -337,9 +341,14 @@ function caculateTotalQuanlityAndCost(boughtBooks) {
   }
 }
 const payingBtnTag = document.getElementById("paying-btn");
+let count = 0;
 payingBtnTag.addEventListener("click", function () {
   payingDivTag.style.display = "flex";
   payingDivTag.style.flexDirection = "column";
+  payingDivTag.style.position = "fixed";
+  payingDivTag.style.left = 40 + "%";
+  payingDivTag.style.top = 300 + "px";
+  bodyTag.style.backgroundColor = "grey";
   const finalBoughtBooks = JSON.parse(localStorage.getItem("boughtBooks"));
   for (let i = 0; i <= finalBoughtBooks.length - 1; i++) {
     const finalDivTags = document.createElement("tr");
@@ -381,4 +390,8 @@ payingBtnTag.addEventListener("click", function () {
   totalFinalPriceElements.textContent =
     totalCost.toLocaleString("en-US") + " VNĐ";
   fianlDivElements.appendChild(totalFinalPriceElements);
+});
+earsingImformationBtn.addEventListener("click", function () {
+  payingDivTag.style.display = "none";
+  bodyTag.style.backgroundColor = "rgb(252, 248, 243)";
 });

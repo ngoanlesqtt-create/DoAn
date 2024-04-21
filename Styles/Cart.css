@@ -133,8 +133,12 @@ h2 {
 #paying-div {
   display: none;
   width: 500px;
-  min-height: 300px;
+  height: fit-content;
   border: 2px solid orange;
+}
+
+#paying-div h4 {
+  text-align: center;
 }
 #paying-div > div:first-child {
   background-color: orange;
@@ -146,6 +150,11 @@ h2 {
 #final-payment-imformation {
   display: flex;
   flex-direction: column;
+}
+#paying-div button {
+  position: absolute;
+  right: 0%;
+  top: 0%;
 }
 #paying-div table {
   margin: 0px;
