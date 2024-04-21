@@ -487,3 +487,13 @@ for (let i = 0; i <= 50 - 1; i++) {
   leafElements.style.filter = "blur(" + blurSnow + "px)";
   movingPictureTag.appendChild(leafElements);
 }
+
+const usernameTag = document.getElementById("loginhead");
+const registerTag = document.getElementById("regishead");
+localStorage.getItem("token");
+const token = localStorage.getItem("token");
+console.log(token);
+if (token) {
+  usernameTag.textContent = localStorage.getItem("username");
+  registerTag.style.display = "none";
+}

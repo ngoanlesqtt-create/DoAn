@@ -4,25 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../Styles/Cart.css" />
+    <link
+      rel="stylesheet"
+      href="../style.css
+"
+    />
+    <link rel="stylesheet" href="../Styles/Register.css" />
     <link href="../Favicon/Favicon.jpeg" rel="shortcut icon" />
     <link
       rel="stylesheet"
       href="../Assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css"
     />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="../Assets/fonts/fontawesome-free-6.5.2-web/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body id="body">
-    <div id="paying-div">
-      <div>
-        <div>
-          <h1>Thông báo</h1>
-          <h4>Bạn đã thanh toán thành công</h4>
-        </div>
-        <button id="earsing-imformation-btn">X</button>
-      </div>
-      <table id="final-payment-imformation"></table>
-    </div>
+
+  <body>
     <header>
       <div class="firstLine-Header">
         <div class="contact-firstLine-header">
@@ -32,26 +39,17 @@
         <div class="login-cart-firstLine-Header">
           <ul>
             <li>
-              <a
-                id="loginhead"
-                href="Login.html"
-                style="text-decoration: none; color: black"
+              <a href="Login.html" style="text-decoration: none; color: black"
                 >Đăng nhập</a
-              >
-              <i class="fa-solid fa-right-to-bracket"></i>
+              ><i class="fa-solid fa-right-to-bracket"></i>
+            </li>
+            <li style="color: blue">
+              Đăng ký <i class="fa-solid fa-registered"></i>
             </li>
             <li>
-              <a
-                id="regishead"
-                href="Register.html"
-                style="text-decoration: none; color: black"
-                >Đăng kí</a
+              <a href="Cart.html" style="text-decoration: none; color: black">
+                Giỏ hàng</a
               >
-              <i class="fa-solid fa-registered"></i>
-            </li>
-
-            <li>
-              Giỏ hàng
               <i class="fa-solid fa-cart-shopping"></i>
               <div id="bought-book-quanlity"></div>
             </li>
@@ -61,9 +59,8 @@
       <div class="secondLine-Header">
         <div class="Sach-BieuNgu-secondLine-Header">
           <p>
-            <a href="../index.html"
-              ><i class="fa-solid fa-book"></i> Thế giới sách</a
-            >
+            <i class="fa-solid fa-book"></i
+            ><a href="../index.html">Thế giới sách</a>
           </p>
         </div>
         <div class="Search-secondLine-Header">
@@ -103,15 +100,64 @@
       </div>
       <ul>
         <li>
-          <a href="../index.html" id="main-page-movement">Trang chủ/</a>
+          <a href="../index.html" style="text-decoration: none; color: black"
+            >Trang chủ/</a
+          >
         </li>
-        <li>Giỏ hàng</li>
+        <li>Đăng Ký</li>
       </ul>
-      <h1>Giỏ hàng của bạn</h1>
-      <table id="table"></table>
-      <div id="payment"></div>
+      <!----------------------------- Form box ----------------------------------->
+      <div class="form-box">
+        <div class="login-container" id="login">
+          <div class="top">
+            <label class="logheader">Đăng Ký</label>
+            <form id="formId" method="POST" name="registration">
+              <div class="input-box">
+                <input
+                  type="text"
+                  class="input-field"
+                  placeholder="Tên Đăng Nhập"
+                  id="uName"
+                />
+                <i class="bx bx-user"></i>
+              </div>
+              <div class="input-box">
+                <input
+                  type="email"
+                  class="input-field"
+                  placeholder="Email"
+                  id="uEmail"
+                />
+                <i class="bx bx-envelope"></i>
+              </div>
+              <div class="input-box">
+                <input
+                  type="password"
+                  class="input-field"
+                  placeholder="Mật Khẩu"
+                  id="uPassword"
+                />
+                <i class="bx bx-lock-alt"></i>
+              </div>
+              <div class="input-box">
+                <input type="submit" class="submit" value="Đăng Ký" />
+              </div>
+            </form>
+            <div class="two-col">
+              <div class="one">
+                <label
+                  >Đã có tài khoản?
+                  <a href="Login.html" style="color: blue"
+                    >Vào đăng nhập</a
+                  ></label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
-    <footer>
+    <footer id="footer">
       <div class="email">
         <div class="label-email">
           <h3>ĐĂNG KÍ NHẬN EMAIL</h3>
@@ -146,6 +192,6 @@
         </div>
       </div>
     </footer>
-    <script src="../Scripts/Cart.js"></script>
+    <script src="../Scripts/Register.js"></script>
   </body>
 </html>

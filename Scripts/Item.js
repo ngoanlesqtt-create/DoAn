@@ -375,3 +375,13 @@ addedBookBtn.addEventListener("click", function () {
   } else alert("Bạn cần chọn số lượng muốn mua");
 });
 localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
+
+const usernameTag = document.getElementById("loginhead");
+const registerTag = document.getElementById("regishead");
+localStorage.getItem("token");
+const token = localStorage.getItem("token");
+console.log(token);
+if (token) {
+  usernameTag.textContent = localStorage.getItem("username");
+  registerTag.style.display = "none";
+}
