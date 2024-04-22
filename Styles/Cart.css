@@ -1,5 +1,6 @@
 body {
   background-color: rgb(252, 248, 243);
+  height: fit-content;
 }
 header {
   display: block;

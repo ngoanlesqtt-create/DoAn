@@ -122,7 +122,7 @@ header {
 #navigation {
   display: flex;
   justify-content: space-evenly;
-  background-color: rgb(247, 216, 216);
+  background-color: green;
   color: white;
 }
 #navigation ul {
@@ -685,16 +685,16 @@ h2:hover {
   display: flex;
   flex-direction: column;
   position: absolute;
-  background-color: rgb(247, 216, 216);
+  background-color: green;
   z-index: 1;
   top: 100%;
   left: 36%;
-  color: black;
+  color: white;
   border-radius: 20px;
 }
 
 .cross-menu:hover .sub p:hover {
-  color: orange;
+  color: white;
 }
 #searching-div {
   display: flex;

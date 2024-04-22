@@ -27,7 +27,7 @@ const kindBook = [
   "Chính Trị",
 ];
 const thArr = ["", "Tên sản phẩm", "Giá", "Số lượng", "Thành tiền", ""];
-const baseURL = "http://139.180.134.207/DoAnMobile/Client/assets/images/";
+const baseURL = "http://139.180.134.207/DoAn/Client/assets/images/";
 if (totalQuanlity === 0)
   boughtBooksQuanlity.textContent = localStorage.getItem("boughtBooksQuanlity");
 mainTag.appendChild(infomingElement);
@@ -69,7 +69,6 @@ if (boughtBooks !== null) {
     trTags.classList.add(i);
 
     const imgTags = document.createElement("img");
-
     imgTags.classList.add("imgTags");
     imgTags.classList.add(i);
     imgTags.src = baseURL + boughtBooks[i].image;
@@ -144,34 +143,47 @@ function eraserElements(i) {
   for (let j = 0; j <= erasedElements.length - 1; j++)
     erasedElements[j].remove();
 }
+function findClickedItem(i, boughtBooks = []) {
+  const tdTags = document.getElementsByClassName(i);
+  for (let i = 0; i <= boughtBooks.length - 1; i++)
+    if (tdTags[1].src === baseURL + boughtBooks[i].image) return boughtBooks[i];
+}
 const quanlityTags = document.getElementsByClassName("tdQuantityTags");
 for (let i = 0; i <= quanlityTags.length - 1; i++) {
   quanlityTags[i].style.display = "flex";
   const decreasedQuanlityElements = document.createElement("p");
   quanlityTags[i].appendChild(decreasedQuanlityElements);
   decreasedQuanlityElements.textContent = "-";
+  decreasedQuanlityElements.classList.add(i);
   decreasedQuanlityElements.addEventListener("click", function () {
-    const quanlityValues = document.getElementsByClassName("quanlityValues");
-    const costValues = document.getElementsByClassName("tdCostTags");
-    const totalCost = document.getElementsByClassName("tdTotalCostTags");
-    boughtBooks[i].quanlity--;
-    boughtBooks[i].totalCost = boughtBooks[i].quanlity * boughtBooks[i].cost;
-    localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
-    quanlityValues[i].value = boughtBooks[i].quanlity;
+    const tdTags = document.getElementsByClassName(i);
+    let clickedBook = findClickedItem(i, boughtBooks);
+    clickedBook.quanlity--;
+    clickedBook.totalCost = clickedBook.quanlity * clickedBook.cost;
+    handleChangedItem(clickedBook, tdTags, boughtBooks);
     let temporaryBoughtBooksQuanlity = JSON.parse(
       localStorage.getItem("boughtBooksQuanlity")
     );
     temporaryBoughtBooksQuanlity--;
     caculateTotalQuanlityAndCost(boughtBooks);
-    updateTotalCost(i, costValues, totalCost, temporaryBoughtBooksQuanlity);
-    if (boughtBooks[i].quanlity === 0) {
+    updateTotalCost(
+      clickedBook,
+      tdTags[3],
+      tdTags[7],
+      temporaryBoughtBooksQuanlity
+    );
+    if (clickedBook.quanlity === 0) {
       const tdNameTags = document.getElementsByClassName(`${i}`)[2];
       removeItem(tdNameTags, i);
     }
+    if (JSON.parse(localStorage.getItem("boughtBooks")) === null)
+      boughtBooksQuanlity.textContent = 0;
   });
 
   const quanlityInputElements = document.createElement("input");
-  quanlityInputElements.setAttribute("class", "quanlityValues");
+  quanlityInputElements.classList.add(`${i}`);
+  quanlityInputElements.classList.add("quanlityValues");
+
   quanlityInputElements.setAttribute("type", "text");
   quanlityInputElements.setAttribute("value", `${boughtBooks[i].quanlity}`);
   quanlityInputElements.setAttribute("oninput", `checkValue(${i})`);
@@ -182,24 +194,37 @@ for (let i = 0; i <= quanlityTags.length - 1; i++) {
   increasedQuanlityElements.textContent = "+";
 
   increasedQuanlityElements.addEventListener("click", () => {
-    const quanlityValues = document.getElementsByClassName("quanlityValues");
-    const costValues = document.getElementsByClassName("tdCostTags");
-    const totalCost = document.getElementsByClassName("tdTotalCostTags");
-    boughtBooks[i].quanlity++;
-    boughtBooks[i].totalCost = boughtBooks[i].quanlity * boughtBooks[i].cost;
+    const tdTags = document.getElementsByClassName(i);
+    let clickedBook = findClickedItem(i, boughtBooks);
+    clickedBook.quanlity++;
+    clickedBook.totalCost = clickedBook.quanlity * clickedBook.cost;
+    handleChangedItem(clickedBook, tdTags, boughtBooks);
 
-    localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
-
-    caculateTotalQuanlityAndCost(boughtBooks);
-    quanlityValues[i].value = boughtBooks[i].quanlity;
     let temporaryBoughtBooksQuanlity = JSON.parse(
       localStorage.getItem("boughtBooksQuanlity")
     );
     temporaryBoughtBooksQuanlity++;
-    updateTotalCost(i, costValues, totalCost, temporaryBoughtBooksQuanlity);
+    updateTotalCost(
+      clickedBook,
+      tdTags[3],
+      tdTags[7],
+      temporaryBoughtBooksQuanlity
+    );
   });
 }
+function handleChangedItem(clickedBook, tdTags, boughtBooks) {
+  for (let j = 0; j <= boughtBooks.length - 1; j++)
+    if (clickedBook.name === boughtBooks[j].name) {
+      boughtBooks[j].quanlity = clickedBook.quanlity;
+      boughtBooks[j].totalCost = clickedBook.totalCost;
+    }
 
+  localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
+
+  caculateTotalQuanlityAndCost(boughtBooks);
+  tdTags[6].value = clickedBook.quanlity;
+  tdTags[7].textContent = clickedBook.totalCost;
+}
 function checkValue(i) {
   const quanlityValues = document.getElementsByClassName("quanlityValues");
   const costValues = document.getElementsByClassName("tdCostTags");
@@ -293,7 +318,7 @@ function removeLocalStorage() {
   localStorage.removeItem("addedBooks");
 }
 function updateTotalCost(
-  i,
+  clickedBook,
   costValues,
   totalCost,
   temporaryBoughtBooksQuanlity
@@ -303,8 +328,8 @@ function updateTotalCost(
     JSON.stringify(temporaryBoughtBooksQuanlity)
   );
   boughtBooksQuanlity.textContent = temporaryBoughtBooksQuanlity;
-  totalCost[i].textContent =
-    costValues[i].textContent * boughtBooks[i].quanlity + " VNĐ";
+  totalCost.textContent =
+    costValues.textContent * clickedBook.quanlity + " VNĐ";
 }
 if (boughtBooks === null) paymentTag.style.display = "none";
 else paymentTag.style.display = "flex";
@@ -347,7 +372,7 @@ payingBtnTag.addEventListener("click", function () {
   payingDivTag.style.flexDirection = "column";
   payingDivTag.style.position = "fixed";
   payingDivTag.style.left = 40 + "%";
-  payingDivTag.style.top = 300 + "px";
+  payingDivTag.style.top = 140 + "px";
   bodyTag.style.backgroundColor = "grey";
   const finalBoughtBooks = JSON.parse(localStorage.getItem("boughtBooks"));
   for (let i = 0; i <= finalBoughtBooks.length - 1; i++) {
@@ -430,7 +455,6 @@ const usernameTag = document.getElementById("loginhead");
 const registerTag = document.getElementById("regishead");
 localStorage.getItem("token");
 const token = localStorage.getItem("token");
-console.log(token);
 if (token) {
   usernameTag.textContent = localStorage.getItem("username");
   registerTag.style.display = "none";

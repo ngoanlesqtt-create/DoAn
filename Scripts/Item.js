@@ -18,7 +18,7 @@ let boughtBooksQuanlityJSON = JSON.parse(
 let boughtBooks = [];
 const numberKindBook = JSON.parse(window.localStorage.getItem("kindBook"));
 let copiedData = [];
-const baseURL = "http://139.180.134.207/DoAnMobile/Client/assets/images/";
+const baseURL = "http://139.180.134.207/DoAn/Client/assets/images/";
 let datasets = [];
 const kindBook = [
   "Kinh Điển",

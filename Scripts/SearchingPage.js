@@ -24,7 +24,7 @@ if (boughtBooksQuanlity === null && addedBooks === null) {
 
 let searchedDatas = [];
 let searchingWords = localStorage.getItem("searchingWords");
-const baseURL = "http://139.180.134.207/DoAnMobile/Client/assets/images/";
+const baseURL = "http://139.180.134.207/DoAn/Client/assets/images/";
 
 async function handleVerticalJSON() {
   const reponse = await fetch("http://139.180.134.207:3000/book/all");

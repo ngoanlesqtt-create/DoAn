@@ -14,7 +14,7 @@ const cartMovementTag = document.getElementById("cart-movement");
 const popUpTag = document.getElementById("pop-up");
 const bigSearchingDivTag = document.getElementById("searching-div");
 const searchingDivTag = document.getElementById("searched-books");
-const baseURL = "http://139.180.134.207/DoAnMobile/Client/assets/images/";
+const baseURL = "http://139.180.134.207/DoAn/Client/assets/images/";
 let countedImages = 1;
 let relatedBooks = [];
 let item;
@@ -345,7 +345,6 @@ function renderBooks(
     for (x; x <= 3; x++) {
       copiedData[i].books[x].cost =
         copiedData[i].books[x].cost.toLocaleString("en-US");
-      console.log(copiedData[i].books[x].cost);
       imgTopicTags[x].src = baseURL + copiedData[i].books[x].image;
       bookNameTags[x].textContent = copiedData[i].books[x].name;
       bookPriceTags[x].textContent = copiedData[i].books[x].cost + " VNĐ";
@@ -406,16 +405,11 @@ function handleCart(datasets, i, j) {
     );
     if (changedItemQuanlity === null) {
       changedItemQuanlity = JSON.parse(localStorage.getItem("addedBooks"));
-      console.log(
-        "test dong 397 main changedItemQuanlity=",
-        changedItemQuanlity
-      );
     }
   }
 
   if (localStorage.getItem("boughtBooks") !== null) {
     boughtBook = JSON.parse(localStorage.getItem("boughtBooks"));
-    console.log("test dong 399 boughtBook=", boughtBook);
   } else boughtBook = [];
   item = findItemByClick(datasets, i, j);
   changedItemQuanlity++;
@@ -487,15 +481,12 @@ searchingTag.oninput = function () {
           return data;
       });
 
-    console.log(expectedBooks);
-
     if (expectedBooks.length >= 2) {
       for (let i = 0; i < expectedBooks.length - 1; i++)
         for (let j = i + 1; j < expectedBooks.length; j++)
           if (expectedBooks[i].name === expectedBooks[j].name)
             expectedBooks.splice(i, 1);
     }
-    console.log("expectedBooks", expectedBooks);
     let unexpectedBooks = searchedBooks.filter((data) => {
       if (
         data.name[searchingWords.length - 1] !==
@@ -503,7 +494,6 @@ searchingTag.oninput = function () {
       )
         return data;
     });
-    console.log("unexpected books: ", unexpectedBooks);
     expectedBooks.map((data) => {
       renderSearchedItems(data);
     });
@@ -584,7 +574,6 @@ const usernameTag = document.getElementById("loginhead");
 const registerTag = document.getElementById("regishead");
 localStorage.getItem("token");
 const token = localStorage.getItem("token");
-console.log(token);
 if (token) {
   usernameTag.textContent = localStorage.getItem("username");
   registerTag.style.display = "none";
