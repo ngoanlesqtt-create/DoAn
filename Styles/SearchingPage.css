@@ -12,6 +12,8 @@ img {
   flex: 1 400px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 #main-page div {
   display: flex;
@@ -19,6 +21,13 @@ img {
   align-items: center;
   background-color: white;
   padding: 40px;
+  cursor: pointer;
+}
+#main-page div button {
+  cursor: pointer;
+  background-color: green;
+  border: 0px;
+  border-radius: 20px;
 }
 .contact:hover {
   width: 280px;

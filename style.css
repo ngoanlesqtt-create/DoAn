@@ -1,3 +1,6 @@
+* {
+  scroll-behavior: smooth;
+}
 body {
   background-color: grey;
   margin: 0px;
@@ -541,6 +544,10 @@ a {
   transition-duration: 3s, 0.1s;
   transition-timing-function: ease-in-out;
 }
+.contact img {
+  width: 50px;
+  height: 50px;
+}
 .contact:hover {
   width: 280px;
   background-color: greenyellow;
@@ -549,10 +556,23 @@ a {
   top: 30%;
 }
 .Tik-Tok {
-  top: 40%;
+  top: 35%;
 }
 .message {
-  top: 50%;
+  top: 40%;
+}
+#scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  bottom: 40px;
+  right: 10px;
 }
 #shaking-phone {
   animation-name: shake;

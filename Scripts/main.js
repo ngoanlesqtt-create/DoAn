@@ -14,6 +14,7 @@ const cartMovementTag = document.getElementById("cart-movement");
 const popUpTag = document.getElementById("pop-up");
 const bigSearchingDivTag = document.getElementById("searching-div");
 const searchingDivTag = document.getElementById("searched-books");
+const scrollTag = document.getElementById("scroll");
 const SubEconomicPageMovementTags =
   document.getElementsByClassName("sub-menu-1");
 const baseURL = "http://139.180.134.207/DoAn/Client/assets/images/";
@@ -585,7 +586,7 @@ registerTag.addEventListener("click", function () {
   if (token) {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
-    registerTag.textContent = `Đăng ký <i class="fa-solid fa-registered">`;
+    registerTag.innerHTML = `Đăng ký <i class="fa-solid fa-registered">`;
     usernameTag.textContent = "Đăng nhập";
   } else location = "../Pages/Register.html";
 });
@@ -600,3 +601,12 @@ for (let i = 0; i <= SubEconomicPageMovementTags.length - 1; i++) {
     window.location = "../Pages/SubEconomicBookPage.html";
   });
 }
+scrollTag.style.display = "none";
+scrollTag.addEventListener("click", function () {
+  window.scrollTo(0, 0);
+});
+window.addEventListener("scroll", function () {
+  var scroll_y = this.scrollY;
+  if (scroll_y !== 0) scrollTag.style.display = "flex";
+  else scrollTag.style.display = "none";
+});

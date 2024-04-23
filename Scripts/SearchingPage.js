@@ -4,6 +4,7 @@ const searchingBtnTag = document.getElementById("search-btn");
 const boughtBooksQuanlityTag = document.getElementById("bought-book-quanlity");
 const cartNavigationTag = document.getElementById("cart-navigation");
 const popUpTag = document.getElementById("pop-up");
+const clickedBookTags = document.getElementsByClassName("clicked-book");
 
 let inputValue;
 let state = false;
@@ -54,6 +55,15 @@ results.then((data) => {
         searchedDatas[i].cost.toLocaleString("en-US") + " VNĐ";
       bigDivElements.appendChild(priceElements);
 
+      const buttonElements = document.createElement("button");
+      buttonElements.textContent = "Chi tiết sản phẩm";
+      bigDivElements.appendChild(buttonElements);
+      bigDivElements.classList.add("clicked-book");
+      bigDivElements.addEventListener("click", function () {
+        localStorage.setItem("book", JSON.stringify(searchedDatas[i]));
+        window.location = "../Pages/Item.html";
+      });
+
       const startTags = document.createElement("h4");
       startTags.innerHTML = `<i class="fa-solid fa-star"></i
             ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`;
@@ -61,8 +71,8 @@ results.then((data) => {
     }
   } else {
     const informingPElements = document.createElement("p");
-    console.log("test dong 48 searchingPagejs");
     informingPElements.textContent = "Không tìm thấy quyển sách bạn muốn";
+    mainPageTag.style.display = "block";
     mainPageTag.appendChild(informingPElements);
   }
 });

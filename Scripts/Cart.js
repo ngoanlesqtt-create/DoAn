@@ -239,15 +239,14 @@ function checkValue(i) {
         totalCost[j].textContent =
           Number(quanlityValues[j].value) * Number(costValues[j].textContent) +
           " VNĐ";
+
         handle(j, quanlityValues);
       }
       if (Number(quanlityValues[j].value) === 0) {
         const tdNameTags = document.getElementsByClassName(`${j}`)[2];
         removeItem(tdNameTags, i);
       }
-    } else {
-      handle(j, quanlityValues);
-    }
+    } else handle(j, quanlityValues);
   }
 }
 function removeItem(tdNameTags, i) {
@@ -284,22 +283,27 @@ function removeItem(tdNameTags, i) {
   caculateTotalQuanlityAndCost(boughtBooks);
 }
 function handle(j, quanlityValues) {
+  const totalQuanlityTag = document.getElementById("totalQuanlity");
+  const totalCostTag = document.getElementById("totalCost");
+  let sum = 0;
   boughtBooks = JSON.parse(window.localStorage.getItem("boughtBooks"));
   for (let y = 0; y < boughtBooks.length; y++) {
     if (boughtBooks[y].name.includes(`${boughtBooks[j].name}`)) {
       boughtBooks[j].quanlity = quanlityValues[j].value;
       let comtemporaryValue = 0;
-      for (let x = 0; x < boughtBooks.length; x++) {
+      for (let x = 0; x < boughtBooks.length; x++)
         if (x !== y) comtemporaryValue += boughtBooks[x].quanlity;
-      }
 
       let changedQuanlity = comtemporaryValue + Number(quanlityValues[j].value);
-      for (let x = 0; x < boughtBooks.length; x++) {
+      for (let x = 0; x < boughtBooks.length; x++)
         if (x === j) {
           boughtBooks[x].quanlity = Number(quanlityValues[j].value);
           localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
         }
-      }
+      sum += boughtBooks[y].quanlity * boughtBooks[y].cost;
+      totalCostTag.textContent =
+        "Tổng tiền: " + sum.toLocaleString("en-US") + " VNĐ";
+      totalQuanlityTag.textContent = "Số lượng: " + changedQuanlity + " quyển";
       boughtBooksQuanlity.textContent = changedQuanlity;
       localStorage.removeItem("boughtBooksQuanlity");
       localStorage.setItem(
