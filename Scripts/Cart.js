@@ -218,36 +218,31 @@ function handleChangedItem(clickedBook, tdTags, boughtBooks) {
       boughtBooks[j].quanlity = clickedBook.quanlity;
       boughtBooks[j].totalCost = clickedBook.totalCost;
     }
-
   localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
-
   caculateTotalQuanlityAndCost(boughtBooks);
   tdTags[6].value = clickedBook.quanlity;
   tdTags[7].textContent = clickedBook.totalCost;
 }
 function checkValue(i) {
+  let sum = 0;
   const quanlityValues = document.getElementsByClassName("quanlityValues");
-  const costValues = document.getElementsByClassName("tdCostTags");
-  const totalCost = document.getElementsByClassName("tdTotalCostTags");
-  for (let j = 0; j <= quanlityValues.length - 1; j++) {
-    if (i === j) {
-      if (isNaN(quanlityValues[j].value) || quanlityValues[j].value < 0) {
-        quanlityValues[j].style.borderColor = "red";
-        boughtBooksQuanlity.textContent = 0;
-      } else {
-        quanlityValues[j].style.borderColor = "green";
-        totalCost[j].textContent =
-          Number(quanlityValues[j].value) * Number(costValues[j].textContent) +
-          " VNĐ";
-
-        handle(j, quanlityValues);
-      }
-      if (Number(quanlityValues[j].value) === 0) {
-        const tdNameTags = document.getElementsByClassName(`${j}`)[2];
-        removeItem(tdNameTags, i);
-      }
-    } else handle(j, quanlityValues);
+  const tdTags = document.getElementsByClassName(i);
+  let clickedBook = findClickedItem(i, boughtBooks);
+  for (let j = 0; j <= boughtBooks.length - 1; j++) {
+    if (boughtBooks[j].name === clickedBook.name) {
+      boughtBooks[j].quanlity = Number(tdTags[6].value);
+      boughtBooks[j].totalCost = boughtBooks[j].quanlity * boughtBooks[j].cost;
+      localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
+    }
+    sum += boughtBooks[j].totalCost;
   }
+  if (clickedBook.name === tdTags[2].textContent) {
+    tdTags[7].textContent = clickedBook.cost * Number(tdTags[6].value) + " VNĐ";
+  }
+  for (let j = 0; j <= quanlityValues.length - 1; j++)
+    handle(j, quanlityValues, sum);
+
+  if (clickedBook.quanlity === 0) removeItem(tdTags[2], i);
 }
 function removeItem(tdNameTags, i) {
   boughtBooks = JSON.parse(window.localStorage.getItem("boughtBooks"));
@@ -282,10 +277,9 @@ function removeItem(tdNameTags, i) {
   }
   caculateTotalQuanlityAndCost(boughtBooks);
 }
-function handle(j, quanlityValues) {
+function handle(j, quanlityValues, sum) {
   const totalQuanlityTag = document.getElementById("totalQuanlity");
   const totalCostTag = document.getElementById("totalCost");
-  let sum = 0;
   boughtBooks = JSON.parse(window.localStorage.getItem("boughtBooks"));
   for (let y = 0; y < boughtBooks.length; y++) {
     if (boughtBooks[y].name.includes(`${boughtBooks[j].name}`)) {
@@ -300,7 +294,7 @@ function handle(j, quanlityValues) {
           boughtBooks[x].quanlity = Number(quanlityValues[j].value);
           localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
         }
-      sum += boughtBooks[y].quanlity * boughtBooks[y].cost;
+
       totalCostTag.textContent =
         "Tổng tiền: " + sum.toLocaleString("en-US") + " VNĐ";
       totalQuanlityTag.textContent = "Số lượng: " + changedQuanlity + " quyển";

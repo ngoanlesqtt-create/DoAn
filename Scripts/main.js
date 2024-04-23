@@ -14,7 +14,7 @@ const cartMovementTag = document.getElementById("cart-movement");
 const popUpTag = document.getElementById("pop-up");
 const bigSearchingDivTag = document.getElementById("searching-div");
 const searchingDivTag = document.getElementById("searched-books");
-const scrollTag = document.getElementById("scroll");
+
 const SubEconomicPageMovementTags =
   document.getElementsByClassName("sub-menu-1");
 const baseURL = "http://139.180.134.207/DoAn/Client/assets/images/";
@@ -22,6 +22,7 @@ let countedImages = 1;
 let relatedBooks = [];
 let item;
 let boughtBook = window.localStorage.getItem("boughtBooks");
+const token = localStorage.getItem("token");
 let datasets = [];
 let books;
 let sum = 0;
@@ -58,7 +59,6 @@ if (boughtBooks !== null) {
     boughtBooksQuanlity = JSON.parse(
       window.localStorage.getItem("boughtBooksQuanlity")
     );
-
   boutBooksQuanlity.textContent = boughtBooksQuanlity;
 }
 
@@ -260,7 +260,6 @@ bookIndexResults.then((data) => {
         imformationDivElements.appendChild(addingBtnElements);
         addingBtnElements.textContent = "Thêm vào giỏ hàng";
         addingBtnElements.addEventListener("click", function () {
-          //dang lam o day
           handleCart(datasets, i, j);
         });
 
@@ -397,7 +396,9 @@ function showItem(item, i) {
     "addedBooks",
     JSON.stringify(boughtBooksQuanlity)
   );
-
+  if (token) {
+    localStorage.setItem("token", token);
+  }
   location.href = "../Pages/Item.html";
 }
 function handleCart(datasets, i, j) {
@@ -442,15 +443,18 @@ function handleCart(datasets, i, j) {
       if (boughtBook[x].name !== item.name) sum += boughtBook[x].quanlity;
 
     for (let x = 0; x <= boughtBook.length - 1; x++)
-      if (boughtBook[x].name == item.name)
+      if (boughtBook[x].name == item.name) {
         boughtBook[x].quanlity = changedItemQuanlity - sum;
+        boughtBook[x].totalCost = boughtBook[x].cost * boughtBook[x].quanlity;
+      }
   }
   boughtBooksQuanlity = changedItemQuanlity;
   localStorage.setItem("boughtBooks", JSON.stringify(boughtBook));
   localStorage.setItem("boughtBooksQuanlity", boughtBooksQuanlity);
 }
 cartMovementTag.addEventListener("click", function () {
-  window.localStorage.setItem("addedBooks", boughtBooksQuanlity);
+  if (JSON.parse(localStorage.getItem("boughtBooksQuanlity")) !== null)
+    window.localStorage.setItem("addedBooks", boughtBooksQuanlity);
   location.href = "./Pages/Cart.html";
 });
 let searchedBooks = [];
@@ -528,6 +532,11 @@ function renderSearchedItems(data = []) {
   const divTags = document.createElement("div");
   searchingDivTag.appendChild(divTags);
   divTags.classList.add("div");
+  divTags.style.cursor = "pointer";
+  divTags.addEventListener("click", function () {
+    localStorage.setItem("searchingWords", nameBookElements.textContent);
+    window.location = "../Pages/SearChingPage.html";
+  });
 
   const imageElements = document.createElement("img");
   imageElements.src = baseURL + data.image;
@@ -539,6 +548,7 @@ function renderSearchedItems(data = []) {
   divTags.appendChild(nameBookElements);
   nameBookElements.classList.add("p");
 }
+
 function removeSearchedItems(i, ps, imges, divs) {
   ps[i].remove();
   imges[i].remove();
@@ -572,10 +582,9 @@ for (let i = 0; i <= 50 - 1; i++) {
   leafElements.style.filter = "blur(" + blurSnow + "px)";
   movingPictureTag.appendChild(leafElements);
 }
-
 const usernameTag = document.getElementById("loginhead");
 const registerTag = document.getElementById("regishead");
-const token = localStorage.getItem("token");
+const scrollTag = document.getElementById("scroll");
 if (token) {
   usernameTag.textContent = localStorage.getItem("username");
   registerTag.innerHTML = `Đăng xuất 
