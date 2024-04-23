@@ -32,15 +32,22 @@ const loginU = async (email, password) => {
       alert("Đăng nhập thất bại!");
     }
   } catch (error) {
-    console.error("Error handling registration: ", error);
-    alert("Error", error.response.data);
+    console.error("Error handling registration: ", error.response);
+    //alert("Error", error.response.data);
   }
 };
 
 function loginUser() {
   const loginEmail = document.getElementById("uemailId").value;
   const loginPass = document.getElementById("ePassword").value;
-
+  if (loginEmail === "") {
+    alert("Bạn chưa nhập email!!!");
+    return;
+  }
+  if (loginPass === "") {
+    alert("Bạn chưa nhập password");
+    return;
+  }
   loginU(loginEmail, loginPass);
 }
 

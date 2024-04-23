@@ -10,16 +10,15 @@ const registerUser = async (name, email, password) => {
       },
       body: JSON.stringify({ name, email, password }),
     });
-    const data = await response.json();
     if (response.status === 200) {
       alert("Thành công", "Tạo tài khoản thành công.");
       window.location = "Login.html";
     } else {
-      alert("Tạo tài khoản thất bại!");
+      alert("Email bị trùng, vui lòng nhập lại");
     }
   } catch (error) {
     console.error("Error handling registration: ", error);
-    Alert.alert("Error", error.response.data);
+    alert("Error", error.response.data);
   }
 };
 
@@ -27,6 +26,20 @@ function validateForm() {
   const name = document.getElementById("uName").value;
   const email = document.getElementById("uEmail").value;
   const password = document.getElementById("uPassword").value;
+  if (name === "") {
+    alert("Bạn chưa nhập UserName");
+    return;
+  }
+
+  if (email === "") {
+    alert("Bạn chưa nhập Email");
+    return;
+  }
+
+  if (password === "") {
+    alert("Bạn chưa nhập mật khẩu");
+    return;
+  }
 
   registerUser(name, email, password);
 }

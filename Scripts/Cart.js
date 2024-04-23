@@ -457,5 +457,7 @@ localStorage.getItem("token");
 const token = localStorage.getItem("token");
 if (token) {
   usernameTag.textContent = localStorage.getItem("username");
-  registerTag.style.display = "none";
+  registerTag.innerHTML = `Đăng xuất 
+  <i class="fa-solid fa-right-from-bracket"></i>
+  `;
 }

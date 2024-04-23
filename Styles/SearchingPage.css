@@ -10,7 +10,8 @@ img {
 }
 #main-page {
   flex: 1 400px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 #main-page div {
   display: flex;

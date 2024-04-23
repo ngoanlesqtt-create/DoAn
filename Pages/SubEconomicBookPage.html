@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NHÀ SÁCH UIT</title>
     <link rel="stylesheet" href="../Styles/EconomicBookPage.css" />
+    <link rel="stylesheet" href="../Styles/SubEconomicBookPage.css" />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../Styles/Cart.css" />
     <link href="../Favicon/Favicon.jpeg" rel="shortcut icon" />
@@ -70,14 +71,18 @@
       </div>
     </header>
     <main>
-      <ul>
-        <li style="width: 70px"><a href="../index.html">Trang chủ/</a></li>
-        <li style="width: 80px">Sách kinh tế</li>
+      <ul id="Navigation">
+        <li style="width: 70px">
+          <a href="../index.html">Trang chủ/</a>
+        </li>
+        <li style="width: 90px">
+          <a href="./EconomicBookPage.html" style="color: black"
+            >Sách kinh tế/</a
+          >
+        </li>
       </ul>
-      <h2 class="headline">Nhân vật kinh tế</h2>
+      <h2 id="headline"></h2>
       <div id="economicFigures"></div>
-      <h2 class="headline">Làm giàu-Bán hàng</h2>
-      <div id="economicSelling"></div>
     </main>
     <footer>
       <div class="email">
@@ -114,6 +119,6 @@
         </div>
       </div>
     </footer>
-    <script src="../Scripts/EconomicBookPage.js"></script>
+    <script src="../Scripts/SubEconomicBookPage.js"></script>
   </body>
 </html>

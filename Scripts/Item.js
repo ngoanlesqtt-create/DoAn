@@ -91,13 +91,13 @@ mainPagetag.addEventListener("click", function () {
   ) {
     localStorage.removeItem("boughtBooks");
     localStorage.removeItem("mainBoughtBooks");
+    localStorage.removeItem("addedBooks");
   } else if (JSON.parse(localStorage.getItem("boughtBooks")) !== null) {
     localStorage.setItem(
       "mainBoughtBooks",
       localStorage.getItem("boughtBooks")
     );
     let a = localStorage.getItem("mainBoughtBooks");
-    console.log("test dong 98 a=", a);
   }
 
   window.location = "../index.html";
@@ -378,10 +378,11 @@ localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
 
 const usernameTag = document.getElementById("loginhead");
 const registerTag = document.getElementById("regishead");
-localStorage.getItem("token");
 const token = localStorage.getItem("token");
-console.log(token);
 if (token) {
+  console.log("Hello");
   usernameTag.textContent = localStorage.getItem("username");
-  registerTag.style.display = "none";
+  registerTag.innerHTML = `Đăng xuất 
+  <i class="fa-solid fa-right-from-bracket"></i>
+  `;
 }

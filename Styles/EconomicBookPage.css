@@ -1,0 +1,29 @@
+main {
+  display: flex;
+  flex-direction: column;
+}
+#economicFigures,
+#economicSelling {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  padding: 50px;
+  width: 1266px;
+}
+#economicFigures div,
+#economicSelling div {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#economicFigures p,
+#economicSelling p {
+  text-align: center;
+}
+#economicFigures img,
+#economicSelling img {
+  height: 150px;
+  width: 100px;
+}

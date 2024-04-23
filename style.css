@@ -197,6 +197,13 @@ header {
   border-radius: 20px;
   border: 5px solid orange;
 }
+
+#verticalTaskBars ul li:first-child a {
+  color: black;
+  display: flex;
+  width: 280px;
+  justify-content: space-between;
+}
 ul {
   list-style-type: none;
 }
