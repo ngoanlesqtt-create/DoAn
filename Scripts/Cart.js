@@ -236,9 +236,9 @@ function checkValue(i) {
     }
     sum += boughtBooks[j].totalCost;
   }
-  if (clickedBook.name === tdTags[2].textContent) {
+  if (clickedBook.name === tdTags[2].textContent)
     tdTags[7].textContent = clickedBook.cost * Number(tdTags[6].value) + " VNĐ";
-  }
+
   for (let j = 0; j <= quanlityValues.length - 1; j++)
     handle(j, quanlityValues, sum);
 

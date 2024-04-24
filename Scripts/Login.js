@@ -32,8 +32,8 @@ const loginU = async (email, password) => {
       alert("Đăng nhập thất bại!");
     }
   } catch (error) {
+    alert("Bạn đã nhập sai thông tin");
     console.error("Error handling registration: ", error.response);
-    //alert("Error", error.response.data);
   }
 };
 

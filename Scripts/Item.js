@@ -70,11 +70,6 @@ itemTag.innerHTML = `
 </tr>
 </table>
 `;
-console.log(
-  "test dong 74 item typeOf JSON.parse(localStorage.getItem('mainBoughtBooks'))",
-  typeof JSON.parse(localStorage.getItem("mainBoughtBooks"))
-);
-
 const mainPagetag = document.getElementById("main-page");
 const decreasedItemTag = document.getElementById("decreased-item");
 const increasedItemTag = document.getElementById("increased-item");

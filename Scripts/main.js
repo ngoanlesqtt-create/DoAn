@@ -378,6 +378,7 @@ function renderBooks(
   }
 }
 
+let username = localStorage.getItem("username");
 function showItem(item, i) {
   if (boughtBooks === null && boughtBook != null) {
     boughtBooks = [];
@@ -388,17 +389,14 @@ function showItem(item, i) {
     window.localStorage.setItem("mainBoughtBooks", boughtBooks);
   }
 
-  window.localStorage.clear();
   window.localStorage.setItem("book", JSON.stringify(item));
-  window.localStorage.setItem("mainBoughtBooks", JSON.stringify(boughtBooks));
   window.localStorage.setItem("kindBook", i);
+  window.localStorage.setItem("mainBoughtBooks", JSON.stringify(boughtBooks));
   window.localStorage.setItem(
     "addedBooks",
     JSON.stringify(boughtBooksQuanlity)
   );
-  if (token) {
-    localStorage.setItem("token", token);
-  }
+
   location.href = "../Pages/Item.html";
 }
 function handleCart(datasets, i, j) {
@@ -407,14 +405,13 @@ function handleCart(datasets, i, j) {
     changedItemQuanlity = JSON.parse(
       localStorage.getItem("boughtBooksQuanlity")
     );
-    if (changedItemQuanlity === null) {
+    if (changedItemQuanlity === null)
       changedItemQuanlity = JSON.parse(localStorage.getItem("addedBooks"));
-    }
   }
 
-  if (localStorage.getItem("boughtBooks") !== null) {
+  if (localStorage.getItem("boughtBooks") !== null)
     boughtBook = JSON.parse(localStorage.getItem("boughtBooks"));
-  } else boughtBook = [];
+  else boughtBook = [];
   item = findItemByClick(datasets, i, j);
   changedItemQuanlity++;
   boutBooksQuanlity.textContent = changedItemQuanlity;
