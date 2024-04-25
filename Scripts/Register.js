@@ -15,6 +15,7 @@ const registerUser = async (name, email, password) => {
       window.location = "Login.html";
     } else {
       alert("Email bị trùng, vui lòng nhập lại");
+      location.reload();
     }
   } catch (error) {
     console.error("Error handling registration: ", error);
@@ -27,17 +28,32 @@ function validateForm() {
   const email = document.getElementById("uEmail").value;
   const password = document.getElementById("uPassword").value;
   if (name === "") {
-    alert("Bạn chưa nhập UserName");
+    alert("Bạn chưa nhập tên đăng nhập");
+    location.reload();
+    return;
+  }
+
+  if (name.length <= 6) {
+    alert("Tên đăng nhập phải lớn hơn 6 ký tự");
+    location.reload();
     return;
   }
 
   if (email === "") {
     alert("Bạn chưa nhập Email");
+    location.reload();
     return;
   }
 
   if (password === "") {
     alert("Bạn chưa nhập mật khẩu");
+    location.reload();
+    return;
+  }
+
+  if (password.length <= 6) {
+    alert("Mật khẩu phải lớn hơn 6 ký tự");
+    location.reload();
     return;
   }
 

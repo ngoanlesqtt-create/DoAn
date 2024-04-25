@@ -545,8 +545,8 @@ a {
   transition-timing-function: ease-in-out;
 }
 .contact img {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 }
 .contact:hover {
   width: 280px;
@@ -556,10 +556,10 @@ a {
   top: 30%;
 }
 .Tik-Tok {
-  top: 35%;
+  top: 33%;
 }
 .message {
-  top: 40%;
+  top: 36%;
 }
 #scroll {
   display: flex;

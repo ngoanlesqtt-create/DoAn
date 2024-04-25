@@ -70,3 +70,14 @@ for (let i = 0; i <= headlineTags.length - 1; i++)
     localStorage.setItem("headline", i);
     window.location = "../Pages/SubEconomicBookPage.html";
   });
+
+const token = localStorage.getItem("token");
+const usernameTag = document.getElementById("loginhead");
+const registerTag = document.getElementById("regishead");
+
+if (token) {
+  usernameTag.textContent = localStorage.getItem("username");
+  registerTag.innerHTML = `Đăng xuất 
+  <i class="fa-solid fa-right-from-bracket"></i>
+  `;
+}

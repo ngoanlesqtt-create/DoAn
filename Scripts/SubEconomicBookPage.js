@@ -58,3 +58,14 @@ results.then((datas) => {
     divElements.appendChild(priceElements);
   });
 });
+
+const token = localStorage.getItem("token");
+const usernameTag = document.getElementById("loginhead");
+const registerTag = document.getElementById("regishead");
+
+if (token) {
+  usernameTag.textContent = localStorage.getItem("username");
+  registerTag.innerHTML = `Đăng xuất 
+  <i class="fa-solid fa-right-from-bracket"></i>
+  `;
+}

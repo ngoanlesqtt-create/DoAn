@@ -138,9 +138,8 @@ results.then((data) => {
 
 function handleIndex(id) {
   for (let i = 0; i < indexItemsTags.length; i++)
-    if (i + 1 === id) {
-      indexItemsTags[i].classList.add("active");
-    } else indexItemsTags[i].classList.remove("active");
+    if (i + 1 === id) indexItemsTags[i].classList.add("active");
+    else indexItemsTags[i].classList.remove("active");
 }
 
 function next() {
@@ -155,7 +154,7 @@ for (let i = 0; i < rightArrows.length; i++) {
   rightArrows[i].addEventListener("click", () => {
     countedImages++;
     if (countedImages <= 4) {
-      mainShowedImageTag.image = `../Assets/MainPictures/p${countedImages}.webp`;
+      mainShowedImageTag.src = `../Assets/MainPictures/p${countedImages}.webp`;
       handleIndex(countedImages);
     } else if (countedImages > 4) countedImages = 4;
   });
@@ -165,7 +164,7 @@ for (let i = 0; i < leftArrows.length; i++) {
   leftArrows[i].addEventListener("click", () => {
     countedImages--;
     if (countedImages >= 1) {
-      mainShowedImageTag.image = `../Assets/MainPictures/p${countedImages}.webp`;
+      mainShowedImageTag.src = `../Assets/MainPictures/p${countedImages}.webp`;
       handleIndex(countedImages);
     } else countedImages = 1;
   });
@@ -378,7 +377,6 @@ function renderBooks(
   }
 }
 
-let username = localStorage.getItem("username");
 function showItem(item, i) {
   if (boughtBooks === null && boughtBook != null) {
     boughtBooks = [];
@@ -409,9 +407,11 @@ function handleCart(datasets, i, j) {
       changedItemQuanlity = JSON.parse(localStorage.getItem("addedBooks"));
   }
 
-  if (localStorage.getItem("boughtBooks") !== null)
-    boughtBook = JSON.parse(localStorage.getItem("boughtBooks"));
-  else boughtBook = [];
+  //if (localStorage.getItem("boughtBooks") !== null) {
+  JSON.parse(localStorage.getItem("boughtBooks")) !== null
+    ? (boughtBook = JSON.parse(localStorage.getItem("boughtBooks")))
+    : (boughtBook = []);
+  //} else boughtBook = [];
   item = findItemByClick(datasets, i, j);
   changedItemQuanlity++;
   boutBooksQuanlity.textContent = changedItemQuanlity;

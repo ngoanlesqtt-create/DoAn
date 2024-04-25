@@ -265,7 +265,7 @@ function changBook(clickedBook) {
   itemQuanlityTag.textContent = changedItemQuanlity;
   bigImageTag.src = baseURL + clickedBook.image;
   bookNameTag.textContent = clickedBook.name;
-  bookCostTag.textContent = clickedBook.cost + " VNĐ";
+  bookCostTag.textContent = clickedBook.cost.toLocaleString("en-US") + " VNĐ";
   mainBookName.textContent = clickedBook.name;
   const bookDetailsTag = document.getElementsByClassName("book-details");
   bookDetailsTag[0].textContent = "Tác giả:" + clickedBook.author;
@@ -371,11 +371,11 @@ addedBookBtn.addEventListener("click", function () {
 });
 localStorage.setItem("boughtBooks", JSON.stringify(boughtBooks));
 
+const token = localStorage.getItem("token");
 const usernameTag = document.getElementById("loginhead");
 const registerTag = document.getElementById("regishead");
-const token = localStorage.getItem("token");
+
 if (token) {
-  console.log("Hello");
   usernameTag.textContent = localStorage.getItem("username");
   registerTag.innerHTML = `Đăng xuất 
   <i class="fa-solid fa-right-from-bracket"></i>

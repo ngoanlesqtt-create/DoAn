@@ -449,10 +449,10 @@ function resetPage() {
   paymentTag.style.display = "none";
 }
 
+const token = localStorage.getItem("token");
 const usernameTag = document.getElementById("loginhead");
 const registerTag = document.getElementById("regishead");
-localStorage.getItem("token");
-const token = localStorage.getItem("token");
+
 if (token) {
   usernameTag.textContent = localStorage.getItem("username");
   registerTag.innerHTML = `Đăng xuất 

@@ -30,9 +30,11 @@ const loginU = async (email, password) => {
       window.location = "../index.html";
     } else {
       alert("Đăng nhập thất bại!");
+      location.reload();
     }
   } catch (error) {
     alert("Bạn đã nhập sai thông tin");
+    location.reload();
     console.error("Error handling registration: ", error.response);
   }
 };
@@ -42,10 +44,12 @@ function loginUser() {
   const loginPass = document.getElementById("ePassword").value;
   if (loginEmail === "") {
     alert("Bạn chưa nhập email!!!");
+    location.reload();
     return;
   }
   if (loginPass === "") {
     alert("Bạn chưa nhập password");
+    location.reload();
     return;
   }
   loginU(loginEmail, loginPass);
